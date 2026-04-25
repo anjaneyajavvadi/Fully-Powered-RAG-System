@@ -7,7 +7,7 @@ from utils.yaml_loader import load_config
 class ContextAwareChunker:
     def __init__(self):
         self.yaml_config=load_config()
-        self.embedding_model=HuggingFaceEmbeddings(model_name=self.yaml_config['embedding']['model_name'])
+        self.embedding_model=HuggingFaceEmbeddings(model_name=self.yaml_config['chunking']['model_name'])
         self.semantic_chunker=SemanticChunker(embeddings=self.embedding_model,breakpoint_threshold_amount=self.yaml_config['chunking']['breakpoint_threshold'])
         self.text_splitter=RecursiveCharacterTextSplitter(chunk_size=self.yaml_config['chunking']['chunk_size'],chunk_overlap=self.yaml_config['chunking']['chunk_overlap'])
 

@@ -1,23 +1,24 @@
 chunking:
-  chunk_size:512
-  chunk_overlap:50
-  breakpoint_threshold:0.85
+  chunk_size: 512
+  chunk_overlap: 50
+  breakpoint_threshold: 0.85
+  model: "sentence-transformers/all-MiniLM-L6-v2"
 
 embedding:
-  model:"sentence-transformers/all-MiniLM-L6-v2"
-  batch_size:8
+  model: "BAAI/bge-m3"
+  batch_size: 8
 
 qdrant:
-  host:'localhost'
-  port:6333
-  collection_name:"rag_system"
+  host: "localhost"
+  port: 6333
+  collection_name: "rag_system"
 
 retrieval:
-  dense_top_k:20
-  sparse_top_k:20
-  rerank_top_k:5
-  rrf_k:60
+  dense_top_k: 20
+  sparse_top_k: 20
+  rerank_top_k: 5
+  rrf_k: 60
 
 llm:
-  model:"claude-sonnet-4-20250514"
-  max_tokens:1024
+  model: "claude-sonnet-4-20250514"
+  max_tokens: 1024
