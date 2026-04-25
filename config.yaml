@@ -11,7 +11,8 @@ embedding:
 qdrant:
   host: "localhost"
   port: 6333
-  collection_name: "rag_system"
+  collection_name: "RAG-System-client"
+  size: 1024
 
 retrieval:
   dense_top_k: 20
