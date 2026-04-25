@@ -1,0 +1,12 @@
+qdrant-client
+fastembed
+unstructured[all-docs]
+langchain-experimental
+sentence-transformers
+rank-bm25
+llmlingua
+ragas
+anthropic
+mlflow
+python-dotenv
+pydantic

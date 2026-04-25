@@ -1,0 +1,46 @@
+{
+  "builder_name": "parquet",
+  "citation": "",
+  "config_name": "corpus",
+  "dataset_name": "fiqa",
+  "dataset_size": 45303212,
+  "description": "",
+  "download_checksums": {
+    "hf://datasets/BeIR/fiqa@979c07a7cb5ccc6ca009792241fa1250b98055dd/corpus/corpus-00000-of-00001.parquet": {
+      "num_bytes": 27700817,
+      "checksum": null
+    }
+  },
+  "download_size": 27700817,
+  "features": {
+    "_id": {
+      "dtype": "string",
+      "_type": "Value"
+    },
+    "title": {
+      "dtype": "string",
+      "_type": "Value"
+    },
+    "text": {
+      "dtype": "string",
+      "_type": "Value"
+    }
+  },
+  "homepage": "",
+  "license": "",
+  "size_in_bytes": 73004029,
+  "splits": {
+    "corpus": {
+      "name": "corpus",
+      "num_bytes": 45303212,
+      "num_examples": 57638,
+      "dataset_name": "fiqa"
+    }
+  },
+  "version": {
+    "version_str": "0.0.0",
+    "major": 0,
+    "minor": 0,
+    "patch": 0
+  }
+}
