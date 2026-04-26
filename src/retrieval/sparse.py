@@ -1,7 +1,7 @@
 from rank_bm25 import BM25Okapi
 from datasets import load_from_disk
 
-class SparseRetrieve:
+class SparseRetriever:
     def __init__(self,chunks:list[dict]):
         self.chunks = chunks
         split_docs = [c["chunk"].lower().split(" ") for c in chunks]
