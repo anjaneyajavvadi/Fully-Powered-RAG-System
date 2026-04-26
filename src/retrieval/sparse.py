@@ -1,10 +1,11 @@
 from rank_bm25 import BM25Okapi
-from datasets import load_from_disk
+import json
 
 class SparseRetriever:
-    def __init__(self,chunks:list[dict]):
-        self.chunks = chunks
-        split_docs = [c["chunk"].lower().split(" ") for c in chunks]
+    def __init__(self):
+        with open("data/chunks.json", "r") as f:
+            self.chunks = json.load(f)
+        split_docs = [c["chunk"].lower().split(" ") for c in self.chunks]
         self.bm25 = BM25Okapi(split_docs)
 
 

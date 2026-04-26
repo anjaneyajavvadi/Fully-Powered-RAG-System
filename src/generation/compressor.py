@@ -1,5 +1,5 @@
 from llmlingua import PromptCompressor
-from utils.yaml_loader import load_config
+from src.utils.yaml_loader import load_config
 
 class Compressor:
     def __init__(self):

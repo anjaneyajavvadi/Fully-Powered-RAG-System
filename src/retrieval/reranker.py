@@ -1,5 +1,5 @@
 from sentence_transformers import CrossEncoder
-from utils.yaml_loader import load_config
+from src.utils.yaml_loader import load_config
 from src.retrieval.fusion import RRF
 
 class ReRanker:

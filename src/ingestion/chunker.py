@@ -3,13 +3,17 @@ from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_community.embeddings import HuggingFaceEmbeddings
 from typing import List
 import yaml
-from utils.yaml_loader import load_config
+from src.utils.yaml_loader import load_config
+from src.utils.logger import get_logger
+
 class ContextAwareChunker:
     def __init__(self):
         self.yaml_config=load_config()
-        self.embedding_model=HuggingFaceEmbeddings(model_name=self.yaml_config['chunking']['model_name'])
+        self.embedding_model=HuggingFaceEmbeddings(model_name=self.yaml_config['chunking']['model'])
         self.semantic_chunker=SemanticChunker(embeddings=self.embedding_model,breakpoint_threshold_amount=self.yaml_config['chunking']['breakpoint_threshold'])
         self.text_splitter=RecursiveCharacterTextSplitter(chunk_size=self.yaml_config['chunking']['chunk_size'],chunk_overlap=self.yaml_config['chunking']['chunk_overlap'])
+        self.logger = get_logger(__name__)
+        self.logger.info("Chunker initialized")
 
     def semantic_chunk(self,text:str)->List[str]:
         return self.semantic_chunker.split_text(text)

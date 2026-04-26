@@ -1,15 +1,20 @@
 from qdrant_client import QdrantClient
 from qdrant_client.http import models
-from utils.yaml_loader import load_config
+from src.utils.yaml_loader import load_config
+from src.utils.logger import get_logger
 import uuid
 
 class VectorStore:
     def __init__(self):
+        self.logger = get_logger(__name__)
+        self.logger.info("Embedder initialized")
         self.config=load_config()
         self.port=self.config['qdrant']['port']
         self.host=self.config['qdrant']['host']
         self.collection_name=self.config['qdrant']['collection_name']
         self.client=QdrantClient(url=f"http://{self.host}:{self.port}")
+        self.logger = get_logger(__name__)
+        self.logger.info("VectorStore initialized")
 
     def create_collection(self):
         self.client.create_collection(
@@ -19,6 +24,7 @@ class VectorStore:
                 distance=models.Distance.COSINE
             )
         )
+        self.logger.info("Collection Created")
 
     def upsert(self,chunks:list[str],vectors:list):
         points=[]
@@ -34,12 +40,14 @@ class VectorStore:
                     }
                 )
             )
+        self.logger.info("starting upsert")
         self.client.upsert(
             collection_name=self.collection_name,
             points=points
         )
-
+        self.logger.info("Completed upsert")
     def search(self,query_vector:list,top_k:int):
+        self.logger.info("Seaching Query")
         return self.client.query_points(
             collection_name=self.collection_name,
             query=query_vector,
