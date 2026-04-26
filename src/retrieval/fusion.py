@@ -2,12 +2,12 @@ from src.retrieval.dense import DenseRetriever
 from src.retrieval.sparse import SparseRetriever
 
 
-class RPF:
+class RRF:
     def __init__(self):
         self.dense_retriever=DenseRetriever()
         self.sparse_retriever=SparseRetriever()
 
-    def calculateRPF(self,query:str,top_k:int=20):
+    def fused_retrieve(self,query:str,top_k:int=20):
         scores={}
         dense_docs=self.dense_retriever.retrieve(query,top_k=top_k)
         sparse_docs=self.sparse_retriever.retrieve(query,top_k=top_k)
