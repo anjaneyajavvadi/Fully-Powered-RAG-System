@@ -7,10 +7,10 @@ class RRF:
         self.dense_retriever=DenseRetriever()
         self.sparse_retriever=SparseRetriever()
 
-    def fused_retrieve(self,query:str,top_k:int=20):
+    def fused_retrieve(self,query:str,top_k:int=10):
         scores={}
-        dense_docs=self.dense_retriever.retrieve(query,top_k=top_k)
-        sparse_docs=self.sparse_retriever.retrieve(query,top_k=top_k)
+        dense_docs=self.dense_retriever.retrieve(query,top_k=20)
+        sparse_docs=self.sparse_retriever.retrieve(query,top_k=20)
 
         doc_map = {}  
 

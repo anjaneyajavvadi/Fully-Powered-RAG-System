@@ -23,3 +23,6 @@ retrieval:
 llm:
   model: "claude-sonnet-4-20250514"
   max_tokens: 1024
+
+crossencoder:
+  model: "BAAI/bge-reranker-v2-m3"
