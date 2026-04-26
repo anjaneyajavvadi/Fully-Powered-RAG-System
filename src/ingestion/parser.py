@@ -18,8 +18,8 @@ class BEIRParser:
             text=doc['text']
 
             chunks=self.chunker.chunk(text)
-            for chunk in chunks:
-                chunk_dict={'id':id,'title':title,'text':text,'chunk':chunk}
+            for i,chunk in enumerate(chunks):
+                chunk_dict={"chunk_id": f"{id}_{j}",'id':id,'title':title,'text':text,'chunk':chunk}
                 parsed_chunks.append(chunk_dict)
 
         return parsed_chunks

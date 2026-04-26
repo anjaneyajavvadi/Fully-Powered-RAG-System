@@ -2,19 +2,13 @@ from rank_bm25 import BM25Okapi
 from datasets import load_from_disk
 
 class SparseRetrieve:
-    def __init__(self):
-        self.bm25=None
-        self.data_path='../data/raw/fiqa_corpus'
-        self.dataset=load_from_disk(self.data_path)
+    def __init__(self,chunks:list[dict]):
+        self.chunks = chunks
+        split_docs = [c["chunk"].lower().split(" ") for c in chunks]
+        self.bm25 = BM25Okapi(split_docs)
 
-    def BM25store(self):
-        all_docs=[]
-        for doc in self.dataset['corpus']:
-            all_docs.append(doc['text'])
 
-        split_docs=[text.lower().split(" ") for text in all_docs]
-        self.bm25=BM25Okapi(split_docs)
-
-    def retrieve(self,query:str,top_k:int):
-        q=query.lower().split(" ")
-        return self.bm25.get_top_n(q,n=top_k)
+    def retrieve(self, query: str, top_k: int) -> list[dict]:
+        q = query.lower().split(" ")
+        top_texts = self.bm25.get_top_n(q, self.chunks, n=top_k)
+        return top_texts
