@@ -25,9 +25,13 @@ class VectorStore:
         for i,(chunk,vector) in enumerate(zip(chunks,vectors)):
             points.append(
                 models.PointStruct(
-                    id=str(uuid.uuid4()),
+                    id=uuid.uuid4(),
                     vector=vector,
-                    payload=chunk
+                    payload={
+                        "title": chunk["title"],
+                        "text": chunk["text"],
+                        "chunk": chunk["chunk"]
+                    }
                 )
             )
         self.client.upsert(
