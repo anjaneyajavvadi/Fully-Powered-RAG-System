@@ -26,3 +26,10 @@ llm:
 
 crossencoder:
   model: "BAAI/bge-reranker-v2-m3"
+
+compression:
+  model: "microsoft/llmlingua-2-bert-base-multilingual-cased-meetingbank"
+  rate: 0.5
+
+azure:
+  deployment_name: "gpt-4o-mini-1"

@@ -9,15 +9,15 @@ class ReRanker:
         self.model_name=self.config['crossencoder']['model']
         self.encoder=CrossEncoder(self.model_name)
 
-    def rerank(self, query: str):
+    def rerank(self, query: str,top_k:int):
         docs = self.rrf.fused_retrieve(query=query, top_k=10)
 
         pairs = [(query, doc['chunk']) for doc in docs]
         scores = self.encoder.predict(pairs)
 
-        top_k = []
+        scored_docs = []
         for i, doc in enumerate(docs):
-            top_k.append({"score": scores[i], **doc})
+            scored_docs.append({"score": scores[i], **doc})
 
-        top_k.sort(key=lambda x: x["score"], reverse=True)
-        return top_k[:5]
+        scored_docs.sort(key=lambda x: x["score"], reverse=True)
+        return scored_docs[:top_k]
