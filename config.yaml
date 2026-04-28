@@ -5,7 +5,7 @@ chunking:
   model: "sentence-transformers/all-MiniLM-L6-v2"
 
 embedding:
-  model: "BAAI/bge-m3"
+  model: "BAAI/bge-large-en-v1.5"
   batch_size: 8
 
 qdrant:

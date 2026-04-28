@@ -6,14 +6,18 @@ from src.indexing.vector_store import VectorStore
 
 parser = BEIRParser()
 
-print("Parsing and chunking documents...")
-chunks = parser.parse()
-print(f"Total chunks: {len(chunks)}")
+# print("Parsing and chunking documents...")
+# chunks = parser.parse()
+# print(f"Total chunks: {len(chunks)}")
 
-# save chunks for BM25
-with open("data/chunks.json", "w") as f:
-    json.dump(chunks, f)
-print("Chunks saved.")
+# # save chunks for BM25
+# with open("data/chunks.json", "w") as f:
+#     json.dump(chunks, f)
+# print("Chunks saved.")
+print("Loading chunks from disk...")
+with open("data/chunks.json", "r") as f:
+    chunks = json.load(f)
+print(f"Loaded {len(chunks)} chunks")
 
 embedder = Embedder()
 vectors = []
@@ -21,7 +25,10 @@ print("Embedding chunks...")
 for i in tqdm(range(0, len(chunks), 8), desc="Embedding"):
     batch = chunks[i:i+8]
     texts = [c["chunk"] for c in batch]
-    batch_vectors = list(embedder.embedding_model.embed(texts))
+    batch_vectors = embedder.embedding_model.encode(
+        texts,
+        normalize_embeddings=True
+    ).tolist()
     vectors.extend(batch_vectors)
 
 print("Upserting to Qdrant...")
